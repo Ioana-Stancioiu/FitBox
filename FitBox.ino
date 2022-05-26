@@ -50,7 +50,7 @@ void loop() {
 }
 
 // calculates average acceleration
-// used for calibrating accelerometre
+// used for calibrating accelerometer
 void readAvgAccel() {
   sensors_event_t event;  
   for (int i = 0; i < N; i++) {
@@ -67,10 +67,10 @@ void readAvgAccel() {
 
 void countSteps() {
    float acc1 = getAccel();
-   delay(100);
+   delay(20);
    float acc2 = getAccel();
 
-   float delta = abs(acc2 - acc1);
+   float delta = acc2 - acc1;
 
     // if difference is bigger than threshold a step was taken
     if (delta > threshold && !flag) {
