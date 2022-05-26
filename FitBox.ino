@@ -3,7 +3,7 @@
 #include <Adafruit_ADXL345_U.h>
 
 // sampling size
-#define N 100
+#define N 80
 #define BUZZER 9
 #define CALORIES_PER_STEP 0.03877
 #define METERS_PER_STEP 0.5
@@ -12,7 +12,7 @@
 Adafruit_ADXL345_Unified accel;
 
 float xavg = 0, yavg = 0, zavg = 0;
-float threshold = 0.5;
+float threshold = 0.3;
 int steps = 0;
 int stored_steps = 0;
 bool flag = false;
@@ -21,10 +21,10 @@ float calories = 0;
 float distance = 0;
 String activityStatus = "Move!";
 long stored_time;
+int steps_per_sec = 0;
 
 void setup() {
   pinMode(BUZZER, OUTPUT);
-  stored_time = millis();
   accel = Adafruit_ADXL345_Unified(1234);
   
   Serial.begin(9600);
@@ -67,13 +67,12 @@ void readAvgAccel() {
 
 void countSteps() {
    float acc1 = getAccel();
-   delay(20);
    float acc2 = getAccel();
 
-   float delta = acc2 - acc1;
+   float delta = abs(acc2 - acc1);
 
     // if difference is bigger than threshold a step was taken
-    if (delta > threshold && !flag) {
+    if (delta >= threshold && !flag) {
         steps++;
         
         reachedGoal = false;

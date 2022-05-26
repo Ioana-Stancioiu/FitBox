@@ -14,3 +14,7 @@ to match your configuration.
 ## Link to project page
 
 * <https://ocw.cs.pub.ro/courses/pm/prj2022/avaduva/activity_tracker>
+
+## Link to demo
+
+* <https://www.youtube.com/watch?v=pOFgCzJCudo>
